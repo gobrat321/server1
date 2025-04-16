@@ -7,8 +7,6 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigin = ["https://autosharee.vercel.app", "https://lalat.vercel.app", "https://sharebooster-by-bogart.vercel.app/"];
-
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
@@ -19,11 +17,6 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/submit', async (req, res) => {
-  const origin = req.headers.origin;
-  if (!allowedOrigin.includes(origin)) {
-    return res.status(400).send('nakaw pa bugok');
-  }
-
   const { cookie, url, amount, interval } = req.body;
 
   if (!cookie || !url || !amount || !interval) {
